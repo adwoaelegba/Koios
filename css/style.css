@@ -22,12 +22,10 @@ header{
 
 }
 
-header .brand{
-    color:white;
-    font-size: 25px;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-decoration: none;
+
+.logo {
+    width: 100px; /* Adjust width for proper sizing */
+    height: auto; /* Maintain aspect ratio */
 }
 
 body{
@@ -35,7 +33,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgb(35, 41, 72);
+    background: rgb(13, 13, 17);
 }
 
 
@@ -62,8 +60,9 @@ body{
     outline: none;
     border: none;
     background: rgba(255, 255, 255, 0.5);
-    color: rgb(84, 122, 228);
+    color: rgb(56, 96, 206);
     font-size:15px ;
+    font-weight: bold;
     text-align: center;
     border-radius: 5px;
     transition:0.5s ;
