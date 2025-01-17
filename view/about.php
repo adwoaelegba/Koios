@@ -20,9 +20,10 @@
 
     <!-- Introduce the tool guide -->
   <div class="section active" id="section1">
+    <img src="../images/koiosguide.png" alt="Koios Guide" class="slide-up">
     <h1>Hi, I am Koios!</h1>
     <p>
-      The titan of knowledge and your privacy agreement summary guide. I'll help you understand privacy terms effortlessly.
+      The titan of knowledge and your privacy agreement summary guide. I'll help you understand privacy policies effortlessly.
     </p>
   </div>
 
