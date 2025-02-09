@@ -78,10 +78,10 @@
     <div class="sidebar">
     <img src="../images/koios.png" alt="Logo" class="logo">
         <a href="www_arsenal.html">Arsenal</a>
-        <a href="#">Apple</a>
-        <a href="#">Bank of America</a>
+        <a href="apple.html">Apple</a>
+        <a href="bankofamerica.html">Bank of America</a>
         <a href="#">Bloomberg</a>
-        <a href="#">Walt Disney</a>
+        <a href="#">Daily Mail</a>
         
     </div>
     
