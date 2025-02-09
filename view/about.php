@@ -45,7 +45,7 @@
   <img src="../images/understanding.webp" alt="Understanding" class="slide-up">
     <h1>Understand Privacy Agreements in Minutes</h1>
     <p>
-      My goal is to make sure you understand privacy agreements by providing you with interactive, easy to understand scenarios. You'll never be confused with me by your side!
+      My goal is to make sure you understand privacy agreements by providing you with conversational, easy to understand scenarios. You'll never be confused with me by your side!
     </p>
   </div>
 
