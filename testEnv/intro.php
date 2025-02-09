@@ -80,8 +80,8 @@
         <a href="www_arsenal.html">Arsenal</a>
         <a href="apple.html">Apple</a>
         <a href="bankofamerica.html">Bank of America</a>
-        <a href="#">Bloomberg</a>
-        <a href="#">Daily Mail</a>
+        <a href="bloomberg.html">Bloomberg</a>
+        <a href="dailymail.html">Daily Mail</a>
         
     </div>
     
