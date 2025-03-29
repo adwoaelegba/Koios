@@ -118,9 +118,7 @@ def refined_text(text):
     client = openai.OpenAI(api_key=api_key)
     response = client.chat.completions.create(
         model="gpt-4-turbo",
-        messages=[{"role": "user", "content": f"Rewrite this privacy policy section using emojis and simple language:
-
-{text}"}],
+        messages=[{"role": "user", "content": f"Rewrite this privacy policy section using emojis and simple language:{text}"}],
         max_tokens=150
     )
     return response.choices[0].message.content
@@ -153,4 +151,4 @@ def koios_summarize():
     return jsonify(summary)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(debug=True)
