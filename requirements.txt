@@ -1,0 +1,11 @@
+flask
+torch
+nltk
+transformers
+sentence-transformers
+scikit-learn
+numpy
+requests
+beautifulsoup4
+openai
+gunicorn
