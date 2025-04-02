@@ -23,8 +23,8 @@ sent_model = SentenceTransformer("all-MiniLM-L6-v2")
 privacy_keywords = {"privacy", "data", "personal", "information", "collection", "third-party", "cookies"}
 legal_phrases = {"third-party sharing", "right to be forgotten", "legitimate interest"}
 
-class TextInput(BaseModel):
-    text: str
+class HTMLInput(BaseModel):
+    file_path: str
 
 def preprocess_text(text):
     for phrase in legal_phrases:
@@ -61,9 +61,41 @@ def refined_text(text):
     )
     return response.choices[0].message.content
 
+def extraction_function(html):
+    with open(html, "r", encoding="utf-8") as file:
+        content = file.read()
+        soup = BeautifulSoup(content, "html.parser")
+
+    sections = {}
+    current_heading = None
+    current_text = []
+
+    for elem in soup.find_all(["h1", "h2", "h3", "p"]):
+        if elem.name in ["h1", "h2", "h3"]:
+            if current_heading:
+                sections[current_heading] = " ".join(current_text).strip()
+            current_heading = elem.get_text().strip()
+            current_text = []
+        else:
+            current_text.append(elem.get_text().strip())
+
+    if current_heading and current_text:
+        sections[current_heading] = " ".join(current_text).strip()
+
+    return sections
+
 @app.post("/summarize")
-async def summarize(text_input: TextInput):
-    extractive_summary = td_extract_summary(text_input.text)
-    abstractive_summary = sum_text(extractive_summary)
-    refined_summary = refined_text(abstractive_summary)
-    return {"summary": refined_summary}
+async def summarize(html_input: HTMLInput):
+    extracted_summary = extraction_function(html_input.file_path)
+    if not extracted_summary:
+        return {"error": "No text extracted from the document."}
+    
+    final_summary = {}
+    for heading, text in extracted_summary.items():
+        extractive_mod_summary = td_extract_summary(text)
+        cleaned_text = extractive_mod_summary.replace("\n", " ").strip()
+        abstractive_mod_summary = sum_text(cleaned_text)
+        refined_summary = refined_text(abstractive_mod_summary)
+        final_summary[heading] = refined_summary
+    
+    return final_summary
