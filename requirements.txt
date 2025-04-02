@@ -1,10 +1,8 @@
 fastapi
 uvicorn
-torch
-transformers
 sentence-transformers
 nltk
 scikit-learn
 numpy
-openai
 beautifulsoup4
+torch
