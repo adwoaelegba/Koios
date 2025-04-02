@@ -1,12 +1,10 @@
-flask
+fastapi
+uvicorn
 torch
-nltk
 transformers
 sentence-transformers
+nltk
 scikit-learn
 numpy
-requests
-beautifulsoup4
 openai
-gunicorn
-sentencepiece
+beautifulsoup4
