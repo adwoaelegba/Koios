@@ -8,6 +8,8 @@ from sentence_transformers import SentenceTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 import openai
+import os
+
 
 # Initialize FastAPI
 app = FastAPI()
@@ -53,7 +55,7 @@ def sum_text(input_text):
     return tokenizer.decode(summary_ids[0], skip_special_tokens=True)
 
 def refined_text(text):
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     response = client.chat.completions.create(
         model="gpt-4-turbo",
         messages=[{"role": "user", "content": f"Rewrite the following privacy policy section using emojis and simple, engaging language:\n\n{text}"}],
