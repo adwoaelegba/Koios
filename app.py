@@ -5,6 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.tokenize import sent_tokenize
 import torch
 from bs4 import BeautifulSoup
+import requests
 
 # Initialize FastAPI
 app = FastAPI()
@@ -40,10 +41,14 @@ def td_extract_summary(text, boost_factor=2.0):
     return " ".join(top_sentences)
 
 def extraction_function(html):
-    with open(html, "r", encoding="utf-8") as file:
-        content = file.read()
-        soup = BeautifulSoup(content, "html.parser")
-
+   # Fetch the HTML content from the provided URL
+    response = requests.get(url)
+    if response.status_code != 200:
+        raise ValueError(f"Failed to fetch the URL: {url}")
+    content = response.text
+    
+    # Parse the HTML with BeautifulSoup
+    soup = BeautifulSoup(content, "html.parser")
     sections = {}
     current_heading = None
     current_text = []
