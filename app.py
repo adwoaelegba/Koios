@@ -6,6 +6,7 @@ from nltk.tokenize import sent_tokenize
 import torch
 from bs4 import BeautifulSoup
 import requests
+import numpy as np
 
 # Initialize FastAPI
 app = FastAPI()
@@ -16,8 +17,10 @@ sent_model = SentenceTransformer("all-MiniLM-L6-v2")
 # Privacy-related keywords and legal phrases (can be expanded)
 legal_phrases = {"third-party sharing", "right to be forgotten", "legitimate interest"}
 
-class HTMLInput(BaseModel):
-    file_path: str
+#class HTMLInput(BaseModel):
+   #file_path: str
+class URLRequest(BaseModel):
+    url: str
 
 def preprocess_text(text):
     for phrase in legal_phrases:
@@ -40,7 +43,7 @@ def td_extract_summary(text, boost_factor=2.0):
     
     return " ".join(top_sentences)
 
-def extraction_function(html):
+def extraction_function(url):
    # Fetch the HTML content from the provided URL
     response = requests.get(url)
     if response.status_code != 200:
@@ -68,14 +71,20 @@ def extraction_function(html):
     return sections
 
 @app.post("/extract_summary")
-async def summarize(html_input: HTMLInput):
-    extracted_summary = extraction_function(html_input.file_path)
+async def summarize(request: URLRequest):
+    # Pass the URL from the request to the extraction function
+    extracted_summary = extraction_function(request.url)  # Use 'request.url' instead of 'html_input.file_path'
+    
     if not extracted_summary:
         return {"error": "No text extracted from the document."}
     
     final_summary = {}
+    
     for heading, text in extracted_summary.items():
+        # Assuming td_extract_summary is your extractive summarization function
         extractive_mod_summary = td_extract_summary(text)
+        
+        # Clean the text (remove newlines and extra spaces)
         cleaned_text = extractive_mod_summary.replace("\n", " ").strip()
         final_summary[heading] = cleaned_text
     
