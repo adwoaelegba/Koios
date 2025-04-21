@@ -1,30 +1,26 @@
-function addButtonOnPrivacy(){
-    const pageBody=document.body.innerText.toLowerCase();
-    if(pageBody.includes("privacy policy")){
-        if (document.getElementById("privacy_button")) return;
-
-        const button= document.createElement("button");
-        button.id="privacy_button";
-        button.style.position="fixed";
-        button.textContent=" View Summary";
-        button.style.bottom = "20px";
-        button.style.right = "20px";
-        button.style.zIndex = 10000;
-        button.style.padding = "10px 15px";
-        button.style.borderRadius = "10px";
-        button.style.background = "#6200ea";
-        button.style.color = "#fff";
-        button.style.border = "none";
-        button.style.cursor = "pointer";
-        button.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
-
-        button.onclick = () => {
-            chrome.runtime.sendMessage({ action: "openPopup" });
-          };
-      
-          document.body.appendChild(button);
-    
-    
-    
+function injectButtonIfNeeded() {
+    const bodyText = document.body.innerText.toLowerCase();
+    if (bodyText.includes("privacy policy")) {
+      if (document.getElementById("privacy-popup-button")) return;
+  
+      const button = document.createElement("button");
+      button.id = "privacy-popup-button";
+      button.textContent = "Summarize Policy";
+      Object.assign(button.style, {
+        position: "fixed", bottom: "20px", right: "20px",
+        zIndex: 10000, padding: "10px 15px", borderRadius: "10px",
+        background: "#6200ea", color: "#fff", border: "none", cursor: "pointer",
+        boxShadow: "0 4px 6px rgba(0,0,0,0.1)"
+      });
+  
+      button.onclick = () => {
+        const pageText = document.body.innerText;
+        chrome.runtime.sendMessage({ action: "summarizePolicy", text: pageText });
+      };
+  
+      document.body.appendChild(button);
     }
-}
+  }
+  
+  injectButtonIfNeeded();
+  
