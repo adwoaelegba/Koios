@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    body { margin: 0; font-family: Arial; padding: 20px; width: 300px; background: #f9f9f9; }
-    .card {
-      border-radius: 16px; padding: 15px; margin-bottom: 10px;
-      color: white; font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    .blue { background-color: #3f51b5; }
-    .green { background-color: #4caf50; }
-    .orange { background-color: #ff9800; }
-    .red { background-color: #f44336; }
-  </style>
 </head>
 <body>
-  <div id="summaryContainer">Loading summary...</div>
-  <script src="popup.js"></script>
+ <!--<div id="summaryContainer"></div>--> 
+
+  <div id="loading-screen" style="display: none;">
+    <img src="/images/koiosguide.png" alt="Koios guide loading" style="width: auto; margin: 20px auto; display: block;">
+    <p id="loading-text" style="text-align: center; font-weight: bold; font-size: 1rem;">Hold on, I'm working on it now</p>
+  </div>
+
+  <div id="SummaryContainer" style="display: none;"></div>
+
+
+
+
+
+  <!--script for handling all JavaScript interactions with the popup-->
+  <script src="/js/popup.js"></script>
 </body>
 </html>

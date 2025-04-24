@@ -24,3 +24,28 @@ function injectButtonIfNeeded() {
   
   injectButtonIfNeeded();
   
+//Highlighting sections of the the privacy agreement in different colours
+const highlightSections = (summaries) => {
+  const colors = ["#FFD700", "#FF69B4", "#87CEFA", "#90EE90", "#FFA07A"];
+  let colorMap = {};
+
+  Object.keys(summaries).forEach((heading, index) => {
+      let headerElems = [...document.querySelectorAll("h1, h2, h3")];
+      let match = headerElems.find(el => el.textContent.trim().includes(heading));
+      if (match) {
+          const color = colors[index % colors.length];
+          match.style.backgroundColor = color;
+          colorMap[heading] = color;
+      }
+  });
+
+  return colorMap;
+};
+
+
+//send to the popup ui
+chrome.runtime.sendMessage({
+  action: "showSummaries",
+  summaries: data["refined summary"],
+  colors: colorMap
+});
