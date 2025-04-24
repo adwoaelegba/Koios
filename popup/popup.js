@@ -26,3 +26,32 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     });
   }
 });
+
+//rotating messages while API is processing the text
+const tips =[
+  "Thinking like a lawyer (but cooler)...",
+  "Doing like important stuff right now",
+   "Let's be real, you wouldn't have read this without me",
+   "Hang on! I'm almost done",
+   "Declined an invitation to Julius Caesar's party to get this done for you"
+];
+
+let tipCount=0;
+let tipInterval;
+
+function startLoading(){
+  document.getElementById("loading-screen").style.display="block";
+  document.getElementById("summaryContainer").style.display="none";
+
+  const loadingText=document.getElementById("loading-text");
+  tipInterval=setInterval(() => {
+    tipCount=(tipCount+1)% tips.length;
+    loadingText.textContent=tips[tipCount];
+  },5000)
+}
+
+function stopLoading(){
+  clearInterval(tipInterval);
+  document.getElementById("loading-screen").style.display="none";
+  document.getElementById("summaryContainer").style.display="block";
+}

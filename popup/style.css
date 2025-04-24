@@ -1,0 +1,65 @@
+/* General popup styling */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    min-width: 350px;
+    min-height: 400px;
+    overflow-y: auto;
+  }
+  
+  /* Splash screen */
+  #splash {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  #splash img {
+    width: 100px;
+    margin-bottom: 20px;
+  }
+  
+  #splash-text {
+    font-size: 18px;
+    font-weight: 500;
+    color: #555;
+    animation: fade 1s ease-in-out infinite alternate;
+  }
+  
+  @keyframes fade {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
+  }
+  
+  /* Summary card container */
+  #summary-container {
+    padding: 15px;
+  }
+  
+  /* Individual summary cards (colors set dynamically by JS) */
+  .summary-card {
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    color: #333;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .summary-card:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Headings inside cards */
+  .summary-card strong {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+  
