@@ -15,7 +15,7 @@ function injectButtonIfNeeded() {
   
       button.onclick = () => {
         const pageText = document.body.innerText;
-        chrome.runtime.sendMessage({ action: "summarizePolicy", text: pageText });
+        chrome.runtime.sendMessage({ action: "summarizePage", text: pageText });
       };
   
       document.body.appendChild(button);
