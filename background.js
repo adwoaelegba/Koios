@@ -1,22 +1,33 @@
-let summaryData = [];
-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === "summarizePolicy") {
-    fetch("https://your-api-endpoint.com/summarize", {
+  if (message.action === "summarizePage") {
+    fetch("https://refinesummary-production.up.railway.app/refined", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: message.text })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ summaries: { "Policy": message.text } })
     })
-    .then(res => res.json())
+    .then(response => response.json())
     .then(data => {
-      summaryData = data.sections; // expecting: [{ title: '', summary: '' }, ...]
+      chrome.tabs.sendMessage(sender.tab.id, {
+        action: "showSummaries",
+        summaries: data["refined summary"],
+        colors: generateColorMap(data["refined summary"])
+      });
     })
-    .catch(err => console.error("API Error:", err));
-  }
+    .catch(error => {
+      console.error("API Error:", error);
+    });
 
-  if (message.action === "getSummaries") {
-    sendResponse({ summaries: summaryData });
+    return true; // Required for async response
   }
-
-  return true; // keep the message channel open for async sendResponse
 });
+
+function generateColorMap(summaries) {
+  const colors = ["#FFD700", "#FF69B4", "#87CEFA", "#90EE90", "#FFA07A"];
+  let colorMap = {};
+  Object.keys(summaries).forEach((heading, index) => {
+    colorMap[heading] = colors[index % colors.length];
+  });
+  return colorMap;
+}

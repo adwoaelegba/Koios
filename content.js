@@ -44,8 +44,33 @@ const highlightSections = (summaries) => {
 
 
 //send to the popup ui
-chrome.runtime.sendMessage({
-  action: "showSummaries",
-  summaries: data["refined summary"],
-  colors: colorMap
+//chrome.runtime.sendMessage({
+  //action: "showSummaries",
+  //summaries: data["refined summary"],
+  //colors: colorMap
+//});
+
+//Hnadling response from button click
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === "showSummaries") {
+    const container = document.createElement("div");
+    container.id = "summaryContainer";
+    Object.assign(container.style, {
+      position: "fixed", top: "20px", right: "20px", width: "300px", 
+      background: "#fff", zIndex: 10001, padding: "15px", 
+      borderRadius: "10px", boxShadow: "0 0 10px rgba(0,0,0,0.1)"
+    });
+
+    Object.entries(message.summaries).forEach(([heading, summary]) => {
+      const card = document.createElement("div");
+      card.style.backgroundColor = message.colors[heading] || "#eee";
+      card.style.padding = "10px";
+      card.style.marginBottom = "10px";
+      card.style.borderRadius = "8px";
+      card.innerHTML = `<strong>${heading}</strong><p>${summary}</p>`;
+      container.appendChild(card);
+    });
+
+    document.body.appendChild(container);
+  }
 });
