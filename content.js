@@ -1,3 +1,5 @@
+console.log("Content script loaded");
+
 function injectButtonIfNeeded() {
     const bodyText = document.body.innerText.toLowerCase();
     if (bodyText.includes("privacy policy")) {
@@ -13,16 +15,53 @@ function injectButtonIfNeeded() {
         boxShadow: "0 4px 6px rgba(0,0,0,0.1)"
       });
   
-      button.onclick = () => {
-        const pageText = document.body.innerText;
-        chrome.runtime.sendMessage({ action: "summarizePage", text: pageText });
-      };
+
+button.onclick = (e) => {
+  e.preventDefault();
+  const pageText = document.body.innerText;
+  const pageUrl = window.location.href; // Get the current page URL
+  //console.log("Content script: Button clicked, sending message with text and URL"); // Add log
+  chrome.runtime.sendMessage({
+    action: "summarizePage",
+    text: pageText, 
+    url: pageUrl // *** Include the URL in the message ***
+  });
+};
   
       document.body.appendChild(button);
     }
   }
   
   injectButtonIfNeeded();
+
+  console.log("Content script loaded");
+
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    console.log("Message received in content script:", message); // ✅
+    if (message.action === "showSummaries") {
+      const container = document.createElement("div");
+      container.id = "summaryContainer";
+      Object.assign(container.style, {
+        position: "fixed", top: "20px", right: "20px", width: "300px", 
+        background: "#fff", zIndex: 10001, padding: "15px", 
+        borderRadius: "10px", boxShadow: "0 0 10px rgba(0,0,0,0.1)"
+      });
+  
+      Object.entries(message.summaries).forEach(([heading, summary]) => {
+        const card = document.createElement("div");
+        card.style.backgroundColor = message.colors[heading] || "#eee";
+        card.style.padding = "10px";
+        card.style.marginBottom = "10px";
+        card.style.borderRadius = "8px";
+        card.innerHTML = `<strong>${heading}</strong><p>${summary}</p>`;
+        container.appendChild(card);
+      });
+  
+      document.body.appendChild(container);
+    }
+  });
+  
+
   
 //Highlighting sections of the the privacy agreement in different colours
 const highlightSections = (summaries) => {
@@ -51,26 +90,3 @@ const highlightSections = (summaries) => {
 //});
 
 //Hnadling response from button click
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === "showSummaries") {
-    const container = document.createElement("div");
-    container.id = "summaryContainer";
-    Object.assign(container.style, {
-      position: "fixed", top: "20px", right: "20px", width: "300px", 
-      background: "#fff", zIndex: 10001, padding: "15px", 
-      borderRadius: "10px", boxShadow: "0 0 10px rgba(0,0,0,0.1)"
-    });
-
-    Object.entries(message.summaries).forEach(([heading, summary]) => {
-      const card = document.createElement("div");
-      card.style.backgroundColor = message.colors[heading] || "#eee";
-      card.style.padding = "10px";
-      card.style.marginBottom = "10px";
-      card.style.borderRadius = "8px";
-      card.innerHTML = `<strong>${heading}</strong><p>${summary}</p>`;
-      container.appendChild(card);
-    });
-
-    document.body.appendChild(container);
-  }
-});

@@ -1,5 +1,5 @@
 //Splash screen while model is loading
-chrome.runtime.sendMessage({ action: "summarizePage" });
+//chrome.runtime.sendMessage({ action: "summarizePage" });
 
 startLoading(); // Start splash while fetching
 
