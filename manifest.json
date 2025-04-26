@@ -5,7 +5,6 @@
     "version": "1.0",
     "description": "This web extension detects privacy policies and terms of service on the web and provides a summary of the document.",
     "action": {
-        "default_popup": "popup/popup.html",
         "default_icon": {
             "16": "favicon-16x16.png",
             "32": "favicon-32x32.png"
@@ -27,5 +26,12 @@
             "js": ["content.js"]
         }
     ],
+    "web_accessible_resources": [
+  {
+    "resources": ["images/*"],
+    "matches": ["<all_urls>"]
+  }
+],
+
     "host_permissions": ["<all_urls>"]
 }

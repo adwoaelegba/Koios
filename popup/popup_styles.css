@@ -1,108 +1,14 @@
-/* popup.css - Revised */
+/* 
+Author: Nana Adwoa Ayiw Elegba
+Date: 26/04/2025
+Description: CSS for the image displayed while the API is still running
+*/
 
-/* General popup styling */
-html, body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  /* Remove fixed height from html, body */
-  /* height: 500px; */
-  /* Remove fixed width if you want it to size to content or rely on body width */
-  /* width: 350px; */
-  /* Remove overflow here, we'll put it on body */
-  /* overflow-y: auto; */
-}
-
-body {
-  background-color: rgb(94, 94, 236); /* Apply background here */
-  width: 350px; /* Set fixed width on body */
-  /* Use max-height and overflow for the main scrollable area */
-  max-height: 500px; /* Set the maximum height for the popup window content */
-  overflow-y: auto; /* Add vertical scrollbar when content exceeds max-height */
-  display: flex; /* Keep flex for layout */
-  flex-direction: column; /* Keep flex direction */
-  padding: 15px; /* Add padding here instead of container */
-  box-sizing: border-box; /* Include padding in the width */
-}
-
-
-/* Splash screen */
-#loading-screen { /* Corrected ID from #splash based on popup.js */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* Set height to fill body if it's the only child */
-  /* Use 100% or flex-grow */
-  flex-grow: 1;
-  text-align: center;
-  /* Padding was moved to body */
-}
-
-#loading-screen img { /* Assuming you have an image here */
-  width: 100px;
-  margin-bottom: 20px;
-}
-
-#loading-text { /* Corrected ID from #splash-text */
-  font-size: 18px;
-  font-weight: 500;
-  color: #555; /* Adjust color for blue background */
-  animation: fade 1s ease-in-out infinite alternate;
-}
-
-@keyframes fade {
-  from { opacity: 0.6; }
-  to { opacity: 1; }
-}
-
-
-/* Summary card container - CORRECT ID and simpler styles */
-#summaryContainer { /* *** CORRECTED ID *** */
-  /* Remove redundant max-height and overflow if body handles scroll */
-  /* max-height: 500px; */
-  /* overflow-y: auto; */
-  flex: 1; /* Allow it to grow within the flex body */
-  /* Remove padding if body has padding */
-  /* padding: 15px; */
-  /* Keep other visual styles */
-  background: #fff; /* Example - or set this in JS per card */
-  border-radius: 10px; /* Example */
-  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Example */
-  /* Ensure width within padded body */
-  width: 100%;
-  box-sizing: border-box;
-  /* Add margin-top if needed to separate from top of popup */
-  /* margin-top: 0; */
-}
-
-/* Individual summary cards - CORRECT CLASS and move styles here */
-.summary-card { /* *** CORRECTED CLASS NAME *** */
-  padding: 12px 15px;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  color: #333; /* Adjust color for card background */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease-in-out;
-  /* Remove padding, margin, border-radius, box-shadow from inline styles in JS */
-  /* Background color might still need to be inline if it varies */
-}
-
-.summary-card:hover {
-  transform: scale(1.02);
-}
-
-/* Headings inside cards */
-.summary-card strong {
-  display: block;
-  font-size: 16px;
-  margin-bottom: 6px;
-}
-
-/* Assuming pulse-image and pulse animation are for loading */
+/* Loading screen image */
 .pulse-image {
   width: 150px;
-  display: block;
   margin: 20px auto;
+  display: block;
   animation: pulse 2s infinite ease-in-out;
 }
 
