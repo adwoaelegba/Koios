@@ -1,5 +1,4 @@
 //Splash screen while model is loading
-//chrome.runtime.sendMessage({ action: "summarizePage" });
 
 startLoading(); // Start splash while fetching
 
@@ -13,6 +12,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       const colour = message.colors[heading] || "#eee";
 
       const card = document.createElement("div");
+      card.classList.add("summary-card");
       card.style.backgroundColor = colour;
       card.style.padding = "10px";
       card.style.margin = "10px 0";
