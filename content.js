@@ -57,28 +57,38 @@ injectButtonIfNeeded();
 let loadingInterval;
 
 function createLoadingPopup() {
-  if (document.getElementById("summaryContainer")) return; // To prevent multiple popups
+  if (document.getElementById("summaryContainer")) return; // Prevent duplicate popups
 
   const container = document.createElement("div");
   container.id = "summaryContainer";
   Object.assign(container.style, {
-    position: "fixed", top: "20px", right: "20px", width: "320px", height: "400px",
-    background: "#fff", zIndex: 10001, padding: "20px", 
-    borderRadius: "12px", boxShadow: "0 0 12px rgba(0,0,0,0.2)",
-    overflowY: "auto", boxSizing: "border-box",
+    position: "fixed",
+    top: "0",
+    right: "0", // or "left" if you prefer
+    width: "400px", // wider than before
+    height: "100vh", // full vertical height
+    background: "#fff",
+    zIndex: 10001,
+    padding: "20px",
+    borderTopLeftRadius: "12px",
+    borderBottomLeftRadius: "12px",
+    boxShadow: "-4px 0 12px rgba(0, 0, 0, 0.2)", // shadow from right side
+    overflowY: "auto",
+    boxSizing: "border-box",
     textAlign: "center"
   });
 
-  // Adding Koios head image and an initial loading text
-  const loadingImageUrl = chrome.runtime.getURL('/images/koiosguide.png');
+  const loadingImageUrl = chrome.runtime.getURL('images/koiosguide.png');
   container.innerHTML = `
-    <div style="padding:20px;">
-      <img src="${loadingImageUrl}" class="pulse-image" style="width:150px;"/>
-      <p id="loading-message" style="margin-top:15px; font-size:16px;">Loading your summary...</p>
+    <div style="padding: 20px;">
+      <img src="${loadingImageUrl}" class="pulse-image" style="width: 150px;" />
+      <p id="loading-message" style="margin-top: 15px; font-size: 16px;">Loading your summary...</p>
     </div>
   `;
 
   document.body.appendChild(container);
+
+
 
   // Rotating loading messages 
   const loadingMessages = [
