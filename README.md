@@ -19,8 +19,9 @@ This tool was used during the experiment to test whether this tool could improve
    
 # Folders
 koios_web_extension code : Contains the frontend (HTML, CSS and JavaScript) code for the web extension
-Model API: Contains FastAPI setup for deployment
+final Model API: Contains FastAPI setup for deployment
 Summarization model: This contains the final summarization pipeline ( TF-IDF+ MiniLM  for extractive summarization and Pegasus LLM and abstractive summmarization) and all the model combinations tested before settling on the final pipeline.
+Extractive summarization- Handles the extractive summarization
 
 # Installation Requirements
 The tool is in two parts, the API which contains both the extractive and abstractive summarization model, and the web extension code, which contains all the frontend code used in designing the extension.
@@ -49,3 +50,8 @@ The tool is in two parts, the API which contains both the extractive and abstrac
 Test environment- These are privacy policies that have been designed in different formats. The web extension can be tested on these websites that can be locally hosted using XAMPP or using the hosted version (https://testkoios.netlify.app/)
 Model combinations- This folder contains all the tested extractive and abstractive combinations.
 
+# GitHub Links
+Extension frontend - https://github.com/adwoaelegba/Koios.git
+API- https://github.com/adwoaelegba/extractsummary.git 
+Test environment- https://github.com/adwoaelegba/testenvironment.git
+Model- https://github.com/adwoaelegba/hybridsummodel.git
