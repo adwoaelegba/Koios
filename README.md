@@ -1,6 +1,12 @@
 # Koios
 This browser extension allows users to easily summarize privacy policies found on websites. The name of extension is inspired by the Greek god of intellect, Koios (Coeus), whose desire for understanding leads him to see beyond what is obvious. In the same way, with a single click, the extension generates a simplified summary in an interactive manner using a hybrid summarization model API, developed from the combination of TF-IDF for extractive summarization and Pegasus LLM for abstractive summarization.
 
+# GitHub Links
+Extension frontend - https://github.com/adwoaelegba/Koios.git
+API- https://github.com/adwoaelegba/extractsummary.git 
+Test environment- https://github.com/adwoaelegba/testenvironment.git
+Model- https://github.com/adwoaelegba/hybridsummodel.git
+
 # Context
 This tool was used during the experiment to test whether this tool could improve user's understanding and facilitate informed consent among Internet users.
 
@@ -47,11 +53,6 @@ The tool is in two parts, the API which contains both the extractive and abstrac
 * Use the Service Worker section in DevTools (under the extension) for background script logs.
 
 # Additional Code
-Test environment- These are privacy policies that have been designed in different formats. The web extension can be tested on these websites that can be locally hosted using XAMPP or using the hosted version (https://testkoios.netlify.app/)
+Test environment- These are privacy policies that have been designed in different formats. The web extension can be tested on these websites that can be locally hosted using XAMPP or using the hosted version (https://testkoios.netlify.app/). The hosted version has been deactivated.
 Model combinations- This folder contains all the tested extractive and abstractive combinations.
 
-# GitHub Links
-Extension frontend - https://github.com/adwoaelegba/Koios.git
-API- https://github.com/adwoaelegba/extractsummary.git 
-Test environment- https://github.com/adwoaelegba/testenvironment.git
-Model- https://github.com/adwoaelegba/hybridsummodel.git
